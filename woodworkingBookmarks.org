@@ -1,0 +1,66 @@
+* https://www.fine-tools.com/liogier.html
+* Specific links:
+** https://toolsforworkingwood.com
+** https://www.classichandtools.com
+* home made quick release vise:
+** [[https://www.youtube.com/watch?v=G59BG3VCfio][my most watched spring version]]
+** [[https://www.youtube.com/watch?v=PCgUs5r5V_8][half filed nut & gravity]]
+** [[https://www.youtube.com/watch?v=k-nepOht0cc][I used this one instead, but my "mortise-tenon" forces an angle]]
+** 
+* Specific tools:
+** https://www.simplecove.com/406/an-inexpensive-frame-saw/
+** [[https://www.youtube.com/watch?v=qK17mwJM0sE][Shinto Rasp]]
+** [[https://paulsellers.com/2016/12/a-rasp-by-liogier/][A Rasp by Liogier]]
+** 
+* Tips, tricks, hacks, jigs
+** [[https://www.youtube.com/watch?v=eYOEbS_ACY0][useful non-hacky Japanese YT tricks, some I almost thought of]]
+* Specific tool build:
+** [[https://www.youtube.com/watch?v=qsTGsKT7UN4][Spokeshave from a block of wood, technique]]
+** 
+* Domestika course:
+** technical drawing has helped
+** Manuel de Barros, just a Brazilian poet
+** Pierre Jaquet Droz. watchmaker:
+*** built anthropomorphic sculptures and birds using mechanisms.
+** Paul Spooner
+*** his work full of humor and simplicity
+** Kazuaki Harada
+*** also simplicity and humor
+** Arthur Ganson. American kinetic artist
+*** uses complex mechanism for relatively simple tasks
+** Lisa Slater. English artist
+*** simple mechanism
+** Mestre Molina
+*** MUST CHECK HIM OUT
+*** builds table top featuring Brazilian life
+*** several puppets on his "diorama"
+*** runs on electrical engine
+* Very cool simple plans for woodworking
+** https://www.familyhandyman.com/list/surprisingly-simple-woodworking-projects-for-beginners/
+* Client personas:
+** The all-natural shake drinker
+*** Loves Montessori toys
+*** cares nothing about "joint quality"
+*** very good eye for detail
+** Classy physics nerd
+*** always wanted to build his own tool, but never had the timeor resource
+*** thinks making a box is easy
+*** probably has potential to become a great woodworker, but needs a trigger
+*** will LIKE your product
+*** respects the fine line between design and function
+** IKEA hater:
+*** Loves cringe bulky wooden stuff
+*** Hates IKEA, but still a corporate simp at heart
+*** Likes Bosch
+*** power obsessed, another side of you
+** 
+* throwaway:
+** [[https://m.youtube.com/watch?v=2Wmzl3bhyJE][folding stool for train]]
+** [[https://m.youtube.com/watch?v=sbMVYTBY8-Q][another folding stool]]
+* we finised our quick release!! should we document it?
+* TODO
+** [[https://www.youtube.com/watch?v=Nrga2vZ0As8][create a huge but simple tool chest]]
+** [[https://www.youtube.com/watch?v=-dwBiQL1Nag][groove plane DIY]]
+** [[https://www.youtube.com/watch?v=bFDt3lUzVPc][this is spring related, called - wire gate]]
+* TODO : This is also a woodworking plan
+** [[./images/woodworking_plan_stool_alt.jpg]]
