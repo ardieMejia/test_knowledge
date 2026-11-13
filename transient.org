@@ -1,0 +1,1272 @@
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="zoho_ticket.css" />
+#+OPTIONS:  toc:nil num:nil ^:nil
+
+
+* Reminder
+*** remember, you made the FUCKING d minor prelude??
+* What to do today:
+** Send CVs by beating Applicant Tracking System using this link: https://resumecaptain.com/
+** Randomizer
+#+begin_src lisp
+
+  (make-list 10 2)
+
+  (setq var1 (-cons*
+              "we need to bind ;b to sly-mode parenthesis, Emacs versor, emacs built-in profiler, edebug, apropos, macro expansion, advising system, indirect buffers, etc."
+              "DB history, Emacs code compass, BACKUP our data, magit, DB or vector for our persistent highlgiats"
+              "email, CV, also Audiosockets, https://vfunction.com/blog/3-tier-application/, do a Gtest for C++"
+              "we do use this link http://programarcadegames.com/index.php?lang=en&chapter=introduction_to_animation with our game, ur graphql link history"
+              "attention is all you need (transformer model), RISC-v, ISA, Haskell"
+              "crochet, Hanifas health, code generation (internet of bugs), ambiguity in corpo legal terms"
+              "try Razvan article on creating portabl GEntoo on USB, commit your treesitter.so in user-emacs-directory coz its pretty safe unless your changing architecture completely, https://www.datacamp.com/blog/docker-projects"
+              "url practices in ~/my-trash/delete/stupidNotion/README.org, STEAM, how banks or best practices for race condition"
+              (append
+               (make-list 3 "Qt practice")
+               (make-list 2 "boppps")
+               (make-list 4 "drawing")
+               )
+              ))
+
+  (nth (random (length var1)) var1)
+
+
+  ;; testing our url randomizer
+
+
+  (defun ardie1()
+  (interactive)
+  (org-copy-subtree)
+  (let (
+        (ardie/org-random-list (butlast (split-string (substring-no-properties (current-kill 0)) "\n")))
+        )
+    (message
+     (nth (random (length ardie/org-random-list)) ardie/org-random-list)
+     )))
+
+#+end_src
+** rsync:
+#+begin_quote
+
+
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/Documents /media/ardie/ardie-back-2025/
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/Desktop /media/ardie/ardie-back-2025/
+
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/emacs-python-workspace /media/ardie/ardie-back-2025/
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/emacs-gforth-workspace /media/ardie/ardie-back-2025/
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/emacs-go-workspace /media/ardie/ardie-back-2025/
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/emacs-csharp-workspace /media/ardie/ardie-back-2025/
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/emacs-lisp-workspace /media/ardie/ardie-back-2025/
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/Music /media/ardie/ardie-back-2025/
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/my-trash /media/ardie/ardie-back-2025/
+
+rsync -avzh --delete --max-size='400M' --exclude="/.*" --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/my-emacs-29-config/tree-sitter /media/ardie/ardie-back-2025/
+
+# ==================================================
+watch out for the different flag, a flag removed
+# ==================================================
+
+rsync -avzh --delete --max-size='400M' --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/.profile /home/ardie/.bashrc /home/ardie/.Xmodmap /home/ardie/.Xmodmap_ORG /home/ardie/my-autocompletes /media/ardie/ardie-back-2025/my-hidden-shell-profiles/
+
+rsync -avzh --delete --max-size='400M' --exclude='*/myenv*/' --exclude='*/.git*/' --exclude='*/.git*' /home/ardie/.bash_history  /media/ardie/ardie-back-2025/my-hidden-shell-profiles/.bash_history_$(date +%Y-%m-%d)
+
+
+
+#+end_quote
+** Mid-progress 42kl push_swap
+*** 1: Pre-Sort and Index (Coordinate Compression)
+**** Normalize your data (your fill_normIndex() is correct)
+*** Step 2: Define Chunk Sizes (The Buckets)
+**** For 100 numbers: ≈ 4 to 5 buckets (chunk size of roughly 20–25 elements).
+**** For 500 numbers: ≈ 9 to 11 buckets (chunk size of roughly 45–50 elements).
+*** Step 3: Push Elements into Buckets (Stack A to Stack B)
+**** Example of pushing bucket by bucket
+
+#+begin_src shell
+
+  Let current_bucket = 1
+  Let bucket_min = 0
+  Let bucket_max = chunk_size * current_bucket
+
+#+end_src
+**** Look at the top element of Stack A.
+**** If its index is within the range [bucket_min, bucket_max]:
+***** Execute pb to push it to Stack B.
+***** Optimization (Optional but recommended): If the pushed number is smaller than the median of the current bucket, execute rb to rotate it to the bottom of Stack B. This keeps the bucket semi-sorted, dramatically lowering the cost of the next phase.
+***** If the top element of Stack A is not in the current bucket range, execute ra to rotate it to the bottom.
+***** Repeat until that bucket is complete
+***** Advance to the next bucket (bucket_min = bucket_max, bucket_max += chunk_size) and repeat the process until Stack A is completely empty.
+*** Step 4: Sort and Re-assemble (Stack B to Stack A)
+**** At this point, Stack B holds all numbers, organized in chunks where the largest elements are at the top and the smallest are at the bottom. However, the numbers inside those chunks are unsorted.
+**** we need to push it back to stack A cleanly:
+**** Find the maximum value currently in Stack B.
+**** Push it to the top of Stack B:
+**** Execute pa to push it back into Stack A.
+**** Repeat this loop until Stack B is empty.
+*** Stack A will now be perfectly sorted in ascending order.
+** Stuff to read for push_swap
+
+*** https://medium.com/@ayogun/push-swap-c1f5d2d41e97
+*** https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a
+*** https://medium.com/@oduwoledare/42-push-swap-explained-psuedocodes-ba8108339556
+*** https://pure-forest.medium.com/push-swap-turk-algorithm-explained-in-6-steps-4c6650a458c0
+*** https://medium.com/@Selbouka/push-swap-easy-algorithm-56fd19bf2ee8
+*** https://leofu890806.medium.com/push-swap-tutorial-fa746e6aba1e
+*** https://medium.com/@ulysse.gks/push-swap-in-less-than-4200-operations-c292f034f6c0
+*** The Step-by-Step Logic:
+**** Find the Minimum: Scan stack_a to find the smallest number and record its position/index.
+**** Optimize Rotations: Determine if the minimum number is closer to the top or the bottom of the stack:
+***** If it is in the top half, use ra (rotate up) to bring it to the top.
+***** If it is in the bottom half, use rra (reverse rotate down) to bring it to the top.
+**** Isolate: Once the minimum is at the top of stack_a, execute pb to push it to stack_b.
+**** Repeat: Repeat steps 1–3 until stack_a has only 2 or 3 elements left (which can be easily sorted using a hardcoded "tiny sort" function).
+**** Reassemble: Push everything from stack_b back to stack_a using pa. Because you pushed the smallest numbers first, stack_b is in descending order, meaning they will arrive back in stack_a perfectly sorted in ascending order.
+*** https://leofu890806.medium.com/push-swap-tutorial-fa746e6aba1e
+*** https://www.geeksforgeeks.org/dsa/radix-sort/
+*** The "Turk" Algorithm (Simplest "High-Score" Strategy)
+*** If you want an algorithm that makes perfect logical sense and easily gets 100% marks, use a greedy cost-calculation strategy (commonly known in 42 as the Turk Algorithm).
+*** Instead of pre-sorting into chunks or buckets, you make a mechanical calculation on every single move.
+*** How it works:
+**** Initial Push: Push the first two numbers from Stack A over to Stack B.
+**** The Greedy Loop: For every remaining element in Stack A (until only 3 are left):
+***** Calculate exactly how many moves (ra, rb, rra, rrb) it would take to push that specific element into its correct, descending position in Stack B.
+***** Find the "cheapest" element (the one requiring the fewest combined moves).
+***** Execute those moves and push it (pb).
+**** Sort the Base: Use your hardcoded 3-number sort on the final 3 numbers left in Stack A.
+**** Push Back: Push everything from Stack B back to Stack A, finding the correct insertion spot each time (which requires minimal moves since B is already mostly ordered).
+**** Align: Shift Stack A until the smallest number is at the very top.
+*** https://medium.com/@msaqib_9803/implementing-generic-sorting-using-function-pointers-in-c-0b15fc975086
+*** [[https://www.youtube.com/watch?v=xeT31rm3bN0][bucket sort explained step by step]]
+*** [[https://www.youtube.com/watch?v=ROnYubH_spM][bucket sort explained in Java]]
+** Emacs
+**** Learning Rogue-like game using these link:
+***** [[https://www.reddit.com/r/roguelikedev/comments/1o5sw2d/any_good_resources_for_making_a_roguelike_in_c/][good resources]]
+***** [[https://itch.io/jam/7drl-challenge-2025][7DRL challenge]]
+***** [[https://github.com/libtcod/libtcod][libtcod]]
+***** [[https://www.roguebasin.com/index.php/Complete_roguelike_tutorial_using_C++_and_libtcod_-_part_1:_setting_up][complete tutorial]]
+***** [[https://libtcod-tutorials.gitlab.io/tutorial-pages/tutorials/tutorial-0/][more links]]
+***** [[https://libtcod.readthedocs.io/en/latest/guides/getting-started.html][getting started]]
+***** [[https://www.roguebasin.com/index.php/Complete_Roguelike_Tutorial,_using_python%2Blibtcod][python and libtcod]]
+**** math in games
+***** https://www.mathnasium.com/math-centers/richmondwest/news/role-mathematics-gaming-rw
+***** https://gamedesignskills.com/game-development/video-game-math/
+***** https://www.reddit.com/r/gamedev/comments/12nd3a/what_math_concepts_have_you_found_to_be_most/
+***** https://pikuma.com/blog/math-for-game-developers
+***** https://scenegraph.academy/article/why-is-math-needed-for-games-development/
+***** https://www.gamedeveloper.com/programming/mathematics-in-videogames
+***** https://www.effortlessmath.com/blog/how-math-skills-give-players-a-competitive-edge-in-various-online-games/
+**** we need to do a command that copies from current buffer folder into other buffer folder, with confirm prompt from user
+**** we need a "code as data" note/file
+**** for C++, from this [[https://fanpengkong.com/post/emacs-ccpp/emacs-ccpp/][link]], we use this everyday, with try packages, until we are familiar, DONT use this until we figure which one uses the , we made it shorter these days.
+#+begin_src emacs-lisp
+
+  ;; from this point on, we deleted all :ensure t to avoid auto-installation
+    ;; lsp
+  (use-package lsp-mode
+    :hook ((c-mode . lsp)
+           (c++-mode . lsp)
+           ;; (lsp-mode . lsp-enable-which-key-integration)
+           )
+    :commands lsp
+    ;; :config
+    ;; (setq lsp-keymap-prefix "C-c l")
+    ;; (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+    ;; (setq lsp-file-watch-threshold 15000)
+    )
+
+  ;; (use-package lsp-ui
+  ;;   :commands (lsp-ui-mode)
+  ;;   :config
+  ;;   (setq lsp-ui-doc-enable nil)
+  ;;   (setq lsp-ui-doc-delay 0.5)
+  ;;   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  ;;   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  ;;   )
+
+  ;; (use-package lsp-ivy
+  ;;   :commands lsp-ivy-workspace-symbol)
+
+  ;; (use-package lsp-treemacs
+  ;;   :commands lsp-treemacs-errors-list)
+
+  ;; company
+  (use-package company
+    :bind ("M-/" . company-complete-common-or-cycle) ;; overwritten by flyspell
+    :init (add-hook 'after-init-hook 'global-company-mode)
+    :config
+    (setq company-show-numbers            t
+          company-minimum-prefix-length   1
+          company-idle-delay              0.5
+          company-backends
+          '((company-files          ; files & directory
+             company-keywords       ; keywords
+             company-capf           ; what is this?
+             company-yasnippet)
+            (company-abbrev company-dabbrev))))
+
+  (use-package company-box
+    :after company
+    :hook (company-mode . company-box-mode))
+
+  ;; flycheck
+  ;; (use-package flycheck
+  ;;   :init (global-flycheck-mode)
+  ;;   :config
+  ;;   (setq flycheck-display-errors-function
+  ;;         #'flycheck-display-error-messages-unless-error-list)
+
+  ;;   (setq flycheck-indication-mode nil))
+
+  ;; (use-package flycheck-pos-tip
+  ;;   :after flycheck
+  ;;   :config
+  ;;   (flycheck-pos-tip-mode))
+
+#+end_src
+**** we need ;;h for select all, coz we still use it a lot for example in adding org-insert-structure-template
+***** Also need indent-region hydra
+**** Social media posting:
+***** Human selfishness
+****** The many paths that I notice myself and others taking to rediscover "socialism".
+****** The fact that a few of the socialists are Indians.
+****** And some of the Chinese and Malays who rediscover this come from Software background.
+****** The fact some had to face not just the harsh reality, but also the fundamental deadlock society is on. Feel it strongly in our guts, to actually rediscover all this.
+****** As 1 YouTuber said, if humanity keeps going down this path of rediscovering this too late. We have no future. We need to be fundamentally unselfish in a huge way. Instead of always thinking about oneselves. We have to think beyond our own tribe even. Its not enough to only associate your own tribe or nationality with "socialism" even, treating it like an identity thing. 
+****** This is all not enough. We need to stop thinking like this. Something has to fundamentally change.
+***** image-magick powers Emacs
+#+begin_src emacs-lisp
+
+  (defun /get-mouse-pos ()
+  (interactive)
+  (if (eq major-mode 'image-mode)
+      ;; (print (mouse-pixel-position))
+      (let ((x-n-y (cdr (mouse-pixel-position))))
+      (print (cdr x-n-y)) )
+    (print "nothing")
+      ))
+
+#+end_src
+***** we finally know how to org-open-at-point, but using our firefox profile, instead of through xdg-open or hardcoded org-link-parameter. We use org-link-set-parameters
+#+begin_src emacs-lisp
+
+  (org-link-set-parameters "https" :follow 'ardie/k-open)
+
+
+  (defun ardie/k-open(path _)
+    (interactive)
+    (async-shell-command (concat "/snap/bin/firefox -P \"newArken\" https://" path)))
+
+#+end_src
+***** Buying tablets:
+****** The cheapest Huion drawing tablet available locally in Malaysia is the Huion H420, priced around 72.99 MYR
+***** We should really be writing about allocations that look like this, why is it they "look" easy, but are counter-intuitive to how C operates
+#+begin_src c
+
+	Stack * game_stack = ft_calloc(1, sizeof(Stack));
+
+#+end_src
+***** Emacs: we should explore how the split-3 wdired code works. It is an advice? How does it automatically know to copy a file to the splitted window to the right.
+***** Long term memory recall is rare in prog lang consideration, but is a consideration when it comes prog lang design
+****** Paradigm Consistency and "Linguistic Relativity" (Lisp, Smalltalk)
+****** Some languages enforce a single, highly consistent mental model. Once that model moves into your long-term memory, you rarely have to look up syntax.
+****** Lisp/Clojure: Everything is an expression wrapped in parentheses ((operator operand1 operand2)). There are almost no syntax rules or operators to memorize. Once your brain internalizes this single structural shape, "recall" becomes effortless because the syntax never changes, no matter how complex the library is.
+****** Smalltalk / Ruby: Everything is an object, and every action is passing a message to an object.
+***** Refactoring, simplifying is an often more valuable skill for engineers, than just sheer skill at solving problems from scratch
+***** Git rebase mystery (pick and squash magic)
+****** https://stackoverflow.com/questions/79678421/can-squash-commits-be-done-in-both-directions-of-the-timestamp
+****** At first, we thought Git only squashes only in 1 direction. But it turns out Git acutally looks into commit ID, so you can reorder, and Git will do the correct direction. (Direction as in, it can squash into an older commit instead of new one, if you choose)
+***** The very interesting argument, that Emacs is perfect for beginners
+****** https://www.youtube.com/watch?v=fxw8hIRLwYg
+***** alternative domain names:
+#+begin_quote
+
+
+
+bytecraft-labs.site	hello@bytecraft-labs.site
+
+code-sandbox.site	build@code-sandbox.site
+
+
+orbitcode.site	launch@orbitcode.site
+
+
+
+
+#+end_quote
+****** write about the bias of survivors bias, and how that relates to shitty Software Engineering and programming culture as a whole
+***** are there ways to test orthogonality and dependency in code?
+***** [[http://xahlee.info/emacs/misc/emacs_lisp_coding_style_language_idioms_controversy.html][Turns out Xah Lee is kinda BASED after all]]
+****** Coding style conventions are mostly harmful. The language's syntax and semantics should naturally enforce it.
+***** https://news.ycombinator.com/item?id=13835507
+****** It's the worst industry I've ever worked for in terms of technology, technical debt, bureaucracy and skill of the average developer.
+****** There also tends to be an arrogance from the developers that think they're good just because their code is handling millions of dollars a day.
+****** The also seem to be the worst with NIH syndrome. 
+***** [[https://joshblais.com/blog/emacs-as-my-browser/][The interesting Joshua Blais on how he browses the web inside Emacs]]
+***** We need to write about using Pandoc for to convert Emacs org-mode to markdown for Discord: [[https://mmk2410.org/2026/04/14/copy-an-org-mode-region-as-markdown][link]]
+****** That guys was inspired a big Emacs guy [[https://mbork.pl/2021-05-02_Org-mode_to_Markdown_via_the_clipboard][Marcin Borkowski]]
+***** We need to repost this somewherer else, its about making eglot faster, coz eglot is also stupid: [[https://www.jamescherti.com/emacs-eglot-performance/][emacs eglot performance]]
+***** We need to do this one for free RAM warning, just look into "/home/ardie/bin/batteryChecker"
+#+begin_src shell
+
+  free -h  | awk 'NR == 2{print substr($4, 1, 3)}'
+
+#+end_src
+***** Write about this element of C somewhere else, call it C, struct, and the short sightedness of "efficiency"
+****** the name "struct" itself is kinda misleading. "struct" implies some kind of "casing".
+****** But struct in C, is just a way to group together variables (or "datapoints") if you will
+****** its a way of telling C, treat these group of variables as a contiguous block of memory
+****** remembering, that C is a language has no awareness of boundary/end (not just in string)
+****** so a common thing in struct, is to always put the length/size of an array (if array is the member of that struct)
+****** its just a group of variables, in that the size (if you were to do sizeof()) is just the size of pointer
+****** a structs address literally starts at its first (child) member
+****** this "struct as a contiguous memory block" emphasizes how C is all about "efficient memory" (also, shortsighted efficiency, as in, "I dont think its a good idea to think about efficiency all the time")
+****** This "efficiency" becomes even more obvious when you Unions in struct, in which both "datapoints" ( if you will) start at the same address, resulting in a switch of either Unions.
+***** I REALLY hate Valgrind, we need a way to replace the string "Invalid write of size 4" :with: "OOOPS, not enough size for 4 bytes" for (comint-mode)
+***** our long winding way to get ato complietion with Bear and etags, finally led us into a rabbithole, and we only need eglot to trigger calling standard header function
+#+begin_src emacs-lisp
+
+    (require 'eglot)
+
+  ;; Hook eglot into C/C++ major modes
+  (add-hook 'ardie/c-mode-hook 'eglot-ensure)
+  (add-hook 'c++-mode-hook 'eglot-ensure)
+
+  ;; and we actually dont need to set
+  ;; (setq rtags-path "/home/ardie/bin")
+  ;; that one is only for rtags-find-symbol-at-point and the like
+
+  ;; remember to M-x eglot
+
+#+end_src
+***** running an eLisp script from terminal
+#+begin_src shell
+
+  /home/ardie/my-emacs-29/bin/emacs -q --script test.el
+
+#+end_src
+***** Search "compromise" + any cool terminology we are exploring
+***** When "looking the part" is the REAL strength, from this [[https://slate.com/technology/2014/01/programmer-privilege-as-an-asian-male-computer-science-major-everyone-gave-me-the-benefit-of-the-doubt.html][article]]:
+***** We need a "reminder" tool for 42KL, inside Emacs
+****** forbidden headers (library, whatever)
+***** Philosophy of Tooling:
+****** Ecological philosophy: body-plus-object system
+****** Herdeggerian Readiness-to-Hand: tools are not passive objects, but define our mode of being in the world. When used effectively, it is "ready-to-hand". They recede from conscious awareness to become an extension of the self. whereas broken tools become present at hand
+****** causal direction and purpose: tools flow from purpose not the reverse.
+****** agency: tools are mediating instruments. Tools enable actions, but constrained to specific methods, a feedback loop occurs where "tools make the man". (The most dangerous element of this is that it shapes "material inheretence")
+***** We need some of this stuff inside of our gud-mode
+#+begin_src emacs-lisp
+
+(keymap-set gud-mode-map "r" 'ardie/test)
+
+#+end_src
+***** Force mouse tracking to make C GDB debugging much better
+#+begin_src emacs-lisp
+
+  (defun my-gdb-tooltip-setup ()
+    "Ensure tooltips and mouse tracking are active for GDB/MI."
+    (gud-tooltip-mode 1)
+    (track-mouse t))
+  
+#+end_src
+***** gdb "we are one single entity" thing:
+#+begin_src emacs-lisp
+
+(defun ardie/gud-n ()
+  (interactive)
+  (gdb-send "gud-a.out" "n")
+  )
+
+(defun ardie/gud-open ()
+  (interactive)
+  ;; (gdb-send "gud-a.out" "n")
+  (gud-gdb "gdb -i=mi a.out")
+  
+  )
+
+(keymap-set ardie/c-mode-map "C-c C-g" 'ardie/test)
+(keymap-set gud-mode-map "n" 'ardie/gud-n)
+
+
+#+end_src
+***** Our progress so far (minimal exam key chord):
+#+begin_src emacs-lisp
+
+    (define-minor-mode ardie-mode
+    "some
+    mode"
+      :global t
+      (setq input-method-function
+            (and ardie-mode
+                 'ardie-input-method))
+
+      )
+
+
+
+
+
+    (defun ardie/back ()
+      (interactive)
+      (ardie-mode -1)
+      (key-chord-mode 1)
+      )
+
+
+
+
+
+    (ardie/back)
+
+  (setq ardie/valid-keys [?j ?q])
+  (setq ardie/seconds 0.3 )
+  (setq ardie/prev-keys nil )
+
+
+  (defun ardie/kc-reset()
+    (setq ardie/key-match nil)
+    (setq ardie/prev-keys nil)
+    (setq ardie/key-repeat nil)
+    )
+
+
+  (defun ardie-input-method (first-char)
+  (cond
+   ((cl-position first-char ardie/valid-keys)
+    (print "its a valid key")
+    (setq ardie/prev-keys first-char)
+    (list first-char)
+    (let ((next-char  (read-event nil nil ardie/seconds)))
+
+      (cond
+
+       ((null next-char)
+        (print "too slow, ignoring")
+        (list first-char)
+        (ardie/kc-reset)
+        )
+       ((eq next-char ardie/prev-keys)
+        (list ?z)
+        (ardie/kc-reset)
+        )
+
+
+
+       (t (list next-char))
+
+       )
+      )
+
+
+    )
+   (t
+    (list first-char))
+   ))
+
+  
+#+end_src
+
+***** Combining 2 repos into a unified history. The general flow looks like this:
+#+begin_src shell
+
+git remote add custom-history-source <some old repo URL/directory>
+
+git fetch custom-history-source
+
+git merge custom-history-source/main --allow-unrelated-histories -m "Merge custom historical commits"
+
+git push origin main
+
+#+end_src
+****** We can even combine the fetch & remote add such as in this example: 
+******* https://saintgimp.org/2013/01/22/merging-two-git-repositories-into-one-repository-without-losing-file-history/
+***** Tote bag:
+****** [[https://www.youtube.com/watch?v=c43Ahe_qFOw][Tote bag with inner and outer bag]]
+******* Reading about trains, on the first ELECTRIC tram being sometime around 1880!!
+******** And noticing the state of public transport in Malaysia, not as bad as in India, but thats a really low bar, especially considering we dont have the kinda protest you saw in Delhi regarding BRT from other car-brained road users.
+******** It literally MAKES NO SENSE at all
+******** If its true that technology is progressing at an accelerated pace, at least thats what all these Javacript, Web3 and now AI bros keep on pushing and claiming.
+******** (I know this a lie anyway)
+******** Oooh, so much "progress".
+******** And yet trains havent improved that much, the first bullet train was in 1964, and that was an ETERNITY in "oooh, so much progress" computer time.
+******** And even the fastest carriage/coach in Malaysia is nowhere near half that speed.
+******** I think its becoz, computer technology, is for the most still too "magical" for even most senior techies.
+******** That its mostly bad culture and art. And theres a lot of bad culture and art in "tech".
+******** Read about trains:
+******* More Emacs snippets to improve, this one is for viewing history with specific commits
+#+begin_src emacs-lisp
+
+  (shell-command "git --git-dir=/home/ardie/Documents/knowledge/my-org-files/.git log --oneline")
+
+
+(let ((ardie/temp-buffer (read-buffer "select EMPTY existing buffer") ))
+  (with-current-buffer ardie/temp-buffer
+    (shell-command
+     (concat "git --git-dir=/home/ardie/Documents/knowledge/my-org-files/.git show " (car kill-ring)":misc/2021/emacsStuff/emacs.org")
+     ardie/temp-buffer)
+    )
+  )
+
+#+end_src
+******* Emacs fido fuzzy literal substring:
+******** https://www.emacs.dyerdwelling.family/emacs/20250905100614-emacs--customizing-emacs-completion-from-fidos-fuzzy-matching-to-literal-substring-search/
+******* https://slate.com/technology/2014/01/programmer-privilege-as-an-asian-male-computer-science-major-everyone-gave-me-the-benefit-of-the-doubt.html
+******* Another snippet, this one for file-find but our version, gets from recent clipboard (to test: diff instance or same):
+#+begin_src emacs-lisp
+
+  ;; we need a filter to check if clipboard latest is file-like 
+
+  (let ((ardie/temp-buffer (concat "*temp-" "*" (number-to-string (random 100000)))))
+  (with-temp-buffer ardie/temp-buffer
+
+                    (clipboard-yank)
+                    (mark-whole-buffer)
+    (kill-ring-save (region-beginning) (region-end))
+
+    )
+
+  (find-file (car kill-ring))
+
+#+end_src
+******* We need to fix this snippet:
+#+begin_src emacs-lisp
+
+  (let ((n 1))
+  (while (< n (length (buffer-list)))
+    (if (= (string-match " " (buffer-name (nth n (buffer-list)))) 0)
+    (with-current-buffer (nth n (buffer-list))
+    (rename-buffer "helloooooo")
+      )
+    ;; (bury-buffer (nth n (buffer-list)))
+    )
+
+    (setf n (1+ n))
+    )
+  )
+  
+#+end_src
+
+******* [[https://futurism.com/artificial-intelligence/ai-companies-destroying-rare-books][AI firms buying, destroying rare books to train models]]
+******** literally ripping off authors’ books to train its AI
+******** taking advantage of a legal concept known as first-sale dosctrine
+******** Print books from the pre-LLM era are structurally guaranteed to be free of this contamination
+******** this practice has become prevalent enough that even well-established book sellers are looking to cash in on the AI boom
+******** Once focused on helping libraries, distributors, and book shops find and sell books, ISBNdb now helps AI companies bulk-buy up a million.
+******** Some service companies like ISBNdb that are helping purchase in bulk, are keeping AI buyers anonymous as part of the huge deal
+******* [[https://thenextweb.com/news/tech-giants-hidden-off-balance-sheet-debt-ai][Five tech giants are hiding $1.65tn in AI debt, using the trick that toppled Enron]]
+******** We should read about this article, and its link terminologies, such as "replacement tenants"
+******** The mechanics are simple. The company packages the debt for chips, servers and power into separate legal entity, often a joint venture, so the cost never flows through its own accounts.
+******* We need a weekly reminder for our Emacs
+#+begin_src emacs-lisp
+
+  (let ((day (shell-command-to-string "LC_ALL=en_EN.utf8 date +%A")))
+    ;; (print " today is ~c" day)
+    (format "today is %s" (string-trim day))
+    )
+
+#+end_src
+******* Post in discord, the case for touch typing
+******* somehow there is an element of revenge of the nerds, when it comes to being a senior programmer. Somehow, life should be bigger than that. 
+******* [[https://onlinelibrary.wiley.com/doi/full/10.1002/eng2.70849][Music Visualization weirdness]]
+******** The author of solidity lang, related to "smart contract" wrote a PhD thesis on this topic
+******** Application of Music Data Visualization Technology in Music Appreciation Teaching
+******* Emacs ternimal emulator is no longer slow:
+******** its got eat-mode
+******** it is so responsive, it run Emacs inside of eat inside of Emacs
+******* [[https://www.harvardmagazine.com/2025/01/harvard-study-memory-creative-thinking][is memory connected to creativity]]
+******** Despite our fatigue of memory (no thanks to fetishization of short term Exams such as in our culture), some are disgusted by the idea of putting value in memory. But this is not the same thing.
+******** creativity might be related to episodic memory, or ability to relive (id like to call it retrieve), specific moments from past experience
+******** We should read about the book called "2001 book The Seven Sins of Memory: How the Mind Forgets and Remembers"
+******** referring to a recent research involving "episodic simulation", aka how the human constructs simulations of past and future events
+******** it refers to a study, of an accident patient with a severe case of amnesia, with shattered "episodic memory", unable to recall personal past experiences, but his "general knowledge" was fine.
+******** most interestingly, when asked what he would to tomorrow, he was unable to plan for the future. Study suggest a strong link between, remembering the past and envisioning the future
+******** led to formation of "constructive episodic simulation hypothesis", merging pieces of the past ideas of the future.
+******** study involving an "induction" test, where non-control subjects did a recall experiment, reveal more detailed innovative ideas
+******** but it comes with a trade-off, subjects with higher divergent creative thinking, showed "memory distortions", adding false details 
+******* Emacs eat-mode, this is worth writing, as its snappy than anything Emacs has previously as a terminal emulator
+******* Write about ur post (save in Important in IG) about "convenience triggering burnout on an unprecedented scale", across Asian countries. 
+******* https://www.instagram.com/p/Da2yRKegapt/?igsh=ZjFkYzMzMDQzZg==
+******** while its true, that most such protestors are usually carried out by NIMBY (Not In My Backyard) folks, those who protest at every idea of development in their neighbourhood. This is not the same, as a public utility like public trains (which proves better in the long run, becoz, as an example, Malaysian traffic isnt going to get better any time for many decades)
+******** This sounds like (but not necessarily similar) to secret Data Center deals across several states in America. One example, in Columbia, the mayor David Mitchell signed a secrecy agreement with DigiPowerX, a data center developer, without consulting Citi Council members.
+******** while NDA agreements are common in the economy. NDA regarding plans of Data Center locations is not a "trade secret", but are often multi-billion agreements under the table
+******** Data Centers consume a lot of energy and water, in some parts of the Western World, the general public has had to burden that additional bill. Becoz, for example, Data Centers are connected to the same power grid.
+******* we need to write about Jevons Paradox
+******** a very stupid paradox that might explain why its not worth it, for infinite growth of tech
+******** 
+******* Why Lisp? (Opinion is fully my own)
+******** [[https://gigamonkeys.com/book/lather-rinse-repeat-a-tour-of-the-repl][Link]]: A real story of, an impressive instance of remote debugging occurred on NASA's 1998 Deep Space 1 mission.
+******** An interesting case on how, even when the Lisp app is deployed, there's often still a way to get to a REPL. You can interact and even debug with an app while its also running a Web Server at the same time
+******* To successfully target the European and Western markets, optimize your LinkedIn profile for global recruiters, build a niche GitHub portfolio showcasing both Functional (e.g., Haskell, Scala, Rust) and Imperative (e.g., Python, Java) projects, and market your time-zone advantage for asynchronous work on global platforms like  [[https://arc.dev/][Arc.]] Here is a step-by-step strategy to position yourself as premium global talent from Malaysia:
+
+1. Frame Your "FP + Imperative" SkillsetWestern startups and tech companies value engineers who understand multiple paradigms.The Pitch: Position yourself as a pragmatic problem solver. You use FP to write highly reliable, bug-free, and maintainable core logic, and imperative languages for performance-critical systems or integrations.Show, Don't Just Tell: Write case studies or technical blog posts (on Medium or Dev.to) explaining why you choose specific paradigms for specific tasks.GitHub: Host open-source projects or toy compilers/libraries written in languages like Scala, Elixir, or Rust.
+
+2. Leverage the Time-Zone AdvantageThe time difference between Malaysia (GMT+8) and Europe (CET/CEST) is 5–6 hours.Asynchronous Advantage: Advertise this as a superpower. You can process pull requests and complete features while European teams sleep, leading to faster development cycles.Meeting Availability: Pitch availability for late-afternoon European syncs (your late evening) to ensure smooth collaboration. [[https://remoteineurope.com/blog/how-to-find-remote-software-developer-jobs-in-europe][remote in europe]]
+
+3. Target the Right PlatformsDo not rely solely on generic job boards. Focus on remote-first and Europe-specific platforms:Arc: A vetted talent platform that connects developers with Western startups and matches candidates for full-time and freelance roles.Remote in Europe: A highly specialized job board for candidates looking for remote tech roles within European time zones.We Work Remotely: The largest established remote-first job community, heavily frequented by US and European companies.LinkedIn: Update your location to "Remote / Europe (Open to Relocation)" or "Asia (EMEA Hours)," and set your target regions to "Europe" or "Worldwide".
+
+4. Optimize Your Resume & CommunicationLanguage: Polish your written English. European employers highly value clear, concise documentation and asynchronous communication.Rates/Salary: Research European developer salaries (e.g., via platforms like Remote Rocketship) to set competitive expectations.Payment Setup: Prepare digital payment rails like Wise or Payoneer to easily receive Euros or USD. [[https://www.remoterocketship.com/country/europe/jobs/developer/?page=1&sort=DateAdded&jobTitle=Developer&locations=Europe][remote rocket ship]]
+
+******* we really need to write about [[https://www.researchgate.net/publication/345242745_Marked_Men_White_Masculinity_in_Crisis][this one]], as well an article that "references" this article
+******** ... While men are consistently inundated with patriarcahl messages that limits their expression of intimacy and teaches them to suppress acts of vulnerability, they are simultaneously censured for upholding these very tenets of masculinity to which they were socialized. This contradiction in social expectation, leaves men with an uncertainty as to what is expected of them (Gourarier, 2019;Kimmel, 1987;Robinson, 2000). However, a contradiction in role expectations for men cannot merely be resolved through a modification in their gender ethos, as this conflict inherently threatens the legitimacy of their power and authority which has been traditionally enshrined within tenets of masculinity. ...
+******* https://wiki.c2.com/?LispForGames
+******** game code can be notoriously ugly, especially when using the typical state polling machine
+******* article after several months long experiment of learning graphics programming
+******** Its important this parallel with learning something else, as you will feel "long" moments of no progress (even for someone who likes digging deep, and with a knack or talent of creative programming)
+******** we need to chech this too: https://gabrielgambetta.com/computer-graphics-from-scratch/09-perspective-projection.html
+******* Links to WRITE:
+******** https://blog.mbedded.ninja/programming/design-patterns/state-machines/
+******** https://www.aleksandrhovhannisyan.com/blog/implementing-a-finite-state-machine-in-cpp/
+******** https://barrgroup.com/blog/how-code-state-machine-c-or-c
+******** https://www.embeddedrelated.com/showarticle/1625.php
+******* we need to write abot Lisp somewhere
+******** https://www.cs.colostate.edu/helpdocs/lispEmacs.html
+******* We wrote this in diary already: Now that we have some familiarity of what GLSL and shaders code look like (2 types of shaders at least), and how they feed code into each other. We should REALLY read about Graphics History. Some interest includes "what is z-buffer". We downloaded the file as History-of-graphics.pdf. But heres the link:
+******** https://graphics.stanford.edu/courses/cs248-01/History-of-graphics/History-of-graphics.pdf
+******* Our DevOps event, also about, Sinar Project event!!
+#+begin_quote
+
+I build AI agent.
+health tech startup
+5 agents in 1 workflow
+dont make users wait
+hanle stream
+
+60 seconds spinner reads as a crash
+
+stream evetes over SSE
+
+user -> init -> update 0> status -> message -> complete
+
+whatd does "stateful" and "load balancer" actually mean
+
+decouple: background thread + event buffer
+
+buffer strem in stream programming
+
+security, injection: guard rails are not enough
+
+cyrber cimr bill in malaysia government
+
+
+#+end_quote
+
+
+******* In Lisp, code and data share the same structure: nested lists known as Abstract Syntax Trees (ASTs). By skipping the traditional parsing step, programmers can manipulate Lisp source code directly as data, unlocking unparalleled metaprogramming capabilities and allowing them to seamlessly extend the language's syntax.
+******* This unique design stems from a core concept called homoiconicity, which provides several distinct advantages
+1. Code is Data (and Vice Versa)
+2. Powerful Macros
+3. Structural Editing & Refactoring
+4. Code Generation
+(Yeah, Im quoting AI, and Im still a noob. But Lisp still seems absolutely fascinating. And Id like to think this explains why Emacs seems so "borderless", even when many competent Lispers say eLisp is not real Lisp)
+******* https://docs.cocos.com/creator/3.6/manual/en/shader/glsl.html
+******* [[https://themaister.net/blog/2025/10/][insightful blog into learning importance of learning compute first when GPU programming, and not just "using API"]]
+******* misnomer:
+******** Uniform's are literally passed from CPU to GPU
+******** but that is jsut the mechanic, what really matters, is that the GPU is just secondary to the whole operation.
+******** Even though the entire pipeline is "important", data is passed to the GPU "imperatively". So uniforms, are "injecting data from your code to the pipeline of a single object"
+******** super important link: https://thebookofshaders.com/glossary/?search=mix
+
+******* twitch ERC setup
+******** setup untested ( number is the real versoin)
+#+begin_quote
+
+access
+mt3sg1qie3e73u6en3mtlrvzzecppd
+
+client id
+gp762nuuoqcoxypju8c569th9wz7q5
+
+refresh token:
+p17sapasfwwvrykq4lfdd1tslvuy8gzi5jo1fk3xs6iq7tuz0e
+
+(erc-tls :server "irc.twitch.tv"
+         :port 6667
+         :password "<your OAuth token>"
+         :nick "<your nick>")
+
+#+end_quote
+******* the myth of the necessity of work:
+- suffering culture: the belief that "work has to be hard"
+- what is procrastination
+- what is boredom: is boredom a bad thing
+
+the myth of the necessity of work:
+- most think SUCCESS = doing things with a David Goggins vibe
+- working hard is a "protestant work ethic". Working hard and consume little
+- in modern times, hard work has replaced religion to make your life meaningful
+- Bertrand Russel was ahead of his time. He wrote about moving towards a 4-hour work day
+- https://aliabdaal.com/newsletter/the-myth-about-hard-work/  
+******* we should be reading about virtual memory, paging, and the difference with embedded
+******* We should download The Age Of Surveillance Capitalism by Shoshana Zhuboff
+******* stuff we collected for reading so far in OpenGL. 
+******** https://stackoverflow.com/questions/37972229/glvertexattribpointer-and-glvertexattribformat-whats-the-difference
+********  replacing the glVertexAttribPointer() with glVertexAttribFormat() and glBindVertexBuffer()
+******** the problems:
+********* it tries to do too many things in 1 function. Provide the format of the data (the step, the stride, etc), and where the data comes from.
+******** [[https://riptutorial.com/opengl/example/32426/using-textures-in-glsl-shaders][riptutorial has cool stuff on opengl that we STILL did not manage to work]]
+******* OpenGL 
+******** We should stop playing with frambuffer logic, (creating shader, linking it, create a vertice array, generating buffer and array, adding data to it, defining attributes and stride/steps and offset, etc...)
+******** Instead, we should just read built in variables and functions for a while, apparently, its quite powerful
+******** https://learnwebgl.brown37.net/12_shader_language/glsl_builtin_functions.html
+******** https://docs.vulkan.org/glsl/latest/chapters/builtinfunctions.html
+******* others texture OpenGL, glsl, vulkan, mid reading
+******** https://www.cs.cornell.edu/courses/cs4621/2015fa/lectures/lec04-practicum-fa15.pdf
+******** https://www.opengl.org/sdk/docs/tutorials/TyphoonLabs/Chapter_3.pdf
+******** https://github.com/mattdesl/lwjgl-basics/wiki/glsl-versions
+******** https://web.engr.oregonstate.edu/~mjb/cs557/Handouts/VulkanGLSL.1pp.pdf
+******** https://en.wikibooks.org/wiki/GLSL_Programming/Rasterization
+******** https://wikis.khronos.org/opengl/Built-in_Variable_(GLSL)
+******* Sinar project links:
+******** https://kopitiam.sinarproject.org/
+******** https://sinarproject.org/get-involved
+******** https://www.slideshare.net/slideshow/making-sense-of-internet-of-things-using-airbox-as-an-example-82766546/82766546#20
+******** https://rimbawatchmy.com/forestTracker
+******** https://huggingface.co/datasets/HCSA/HCSA_Indonesia_Forest_Plot_Data_2023
+******** https://github.com/topics/canopy-height-models
+******** https://old.thinkcity.com.my/wp1/urban-analytics-portal/
+******** https://www.fixmystreet.com/
+******* we should be posting about Kanata, coz its really cool
+******** the function (layer-toggle layers) is not simple, auto maps to layers depending on order, so its not a dumb function (sadly), but it works
+******** tap dances are too taxing on the typists mind, should not be used to trigger layers.
+******** 
+******* https://shahriyarshahrabi.medium.com/write-your-own-game-engine-df1132908cdf
+******* Write about the nightmare of shared library, and how ti relates to "GLIBC version not found"
+******* Kanata - true liberation of keyboard magic:
+******** https://github.com/jtroo/kanata/discussions/888
+******** https://shom.dev/start/using-kanata-to-remap-any-keyboard/#installation
+******** https://github.com/jtroo/kanata/releases
+******** https://github.com/jtroo/kanata/wiki/Avoid-using-sudo-on-Linux
+******* daily SPF
+******* https://stackoverflow.com/questions/21652546/what-is-the-role-of-glbindvertexarrays-vs-glbindbuffer-and-what-is-their-relatio
+******** misnomer (we REALLY need to write this one down):
+- the buffer is the binary/stream if you will, we dont pass it to the shader, we just "make it current", againt OpenGL has ugly globals, but we can think of it as this way
+- the vertex array is actually FOR the SHADER, we make it current, but we also define pointers to it, so the program knows when to use it.
+- also in the example below, you see more modern shortcuts, this time binding ALL attributes to buffer, NO defining a pointer for the shader, NO binding a buffer first, just straight deal with the array
+
+
+
+******* attempt:
+KMONAD (https://codebenchers.com/blog/kmonad-on-ubuntu-program-your-keyboard):
+- chmod +x kmonad
+- ./kmonad
+- using evtest and listing /dev/input/my-id or /dev/input/my-path
+- it should be ~/.config/kmonad/config.kbd
+- install kmonad as a service: copy executable to /usr/bin/kmonad
+- create a service file (that points to ur config): /etc/systemd/system/kmonad.service
+- "systemctl enable" and "systemctl start" that specific service
+******* macros
+C and C++ macros pollute the namespace because the preprocessor relies on simple text substitution. It does not respect scopes like namespaces, classes, or functions. Any macro you define can accidentally overwrite matching code downstream, causing silent bugs or compilation errors. [1, 2, 3] 
+## Why Macro Pollution Happens
+******** Global scope: Macros apply globally from the line they are defined until the end of the compilation unit.
+******** No type safety: The preprocessor runs before the compiler, replacing text blindly.
+******** Shadowing errors: A macro named MAX will break any variable, function, or class method named MAX. [4, 5] 
+
+## Modern Workarounds in C++
+You can replace almost all macros with standard C++ features that respect scope and types. [6, 7] 
+## 1. Use Inline Functions for Function-Like Macros [8] 
+Replace macro logic with inline or constexpr functions. They obey namespaces and classes. [9, 10, 11] 
+
+// Bad macro#define SQUARE(x) ((x) * (x))
+// Good workaroundnamespace MathUtils {
+template <typename T>
+    constexpr T square(T x) { return x * x; }
+}
+
+## 2. Use constexpr or const for Constant Macros [12, 13] 
+Replace numeric and string macros with typed constants.
+
+// Bad macro#define BUFFER_SIZE 1024
+// Good workaroundnamespace Config {
+    constexpr int BufferSize = 1024;
+}
+
+## 3. Use Enums for Groups of Constants [14, 15] 
+For related integer constants, strongly typed enum class keeps names isolated.
+
+// Bad macro#define COLOR_RED 0#define COLOR_BLUE 1
+// Good workaroundenum class Color {
+    Red,
+    Blue
+};
+
+## Legacy and C Workarounds
+If you must use macros for conditional compilation or platform-specific code, use these mitigation techniques. [16, 17] 
+## 1. Use Unique Prefixes [18] 
+Prefix macro names with your project or library name in all capital letters. [19] 
+
+#define MYPROJECT_LOG_ERROR(msg) // Less likely to collide
+
+## 2. Undefine Macros Immediately
+If a macro is only needed inside a specific file, undefine it as soon as you are done. [20] 
+
+#define TEMPORARY_MACRO 5// ... use macro here ...#undef TEMPORARY_MACRO // Pollution stops here
+
+## 3. Wrap in do-while(0) for Multi-line Blocks [21, 22] 
+This ensures the macro behaves like a single statement and does not break control flow structures. [23, 24] 
+
+#define SAFE_PRINT(x) do { \
+    std::cout << x << std::endl; \
+} while(0)
+
+Would you like to look at a specific macro in your codebase to see how we can rewrite it using modern C++?
+
+
+https://www.reddit.com/r/cpp/comments/gov4ap/what_do_we_need_to_get_completely_rid_of_macros/
+
+
+https://www.fluentcpp.com/2018/09/04/function-poisoning-in-cpp/
+
+https://locka99.gitbooks.io/a-guide-to-porting-c-to-rust/content/porting_from_cpp/namespace_collisions.html
+
+
+https://www.reddit.com/r/C_Programming/comments/vworgh/are_macros_like_this_evaluated_at_runtime_or_at/
+
+
+https://gist.github.com/lefticus/10191322
+
+
+https://www.reddit.com/r/learnprogramming/comments/xdffy4/are_cc_macros_bad/
+
+
+https://www.vaia.com/en-us/textbooks/computer-science/c-how-to-program-8-edition/chapter-14/problem-11-why-might-you-choose-to-use-a-function-template-i/
+
+
+https://learn.microsoft.com/en-us/cpp/preprocessor/macros-c-cpp?view=msvc-170
+
+
+https://dev.to/pauljlucas/cc-preprocessor-macros-fh5
+
+
+https://www.reddit.com/r/learnprogramming/comments/xdffy4/are_cc_macros_bad/
+
+
+https://www.mathworks.com/help/bugfinder/ref/certcrec.pre12c.html
+
+
+https://eecs390.github.io/notes/metaprogramming.html
+
+
+https://codefinity.com/blog/Understanding-Preprocessor-Directives-in-C-plus-plus
+
+
+https://mahinhasanaiub.medium.com/understanding-macros-in-c-define-directive-and-its-applications-called-macro-82899479dbbd
+
+https://news.ycombinator.com](https://news.ycombinator.com/item?id=26735655
+
+https://www.naukri.com](https://www.naukri.com/code360/library/macros-in-cpp
+
+https://softwareengineering.stackexchange.com/questions/412249/current-industry-standard-with-regards-to-c-macros
+
+https://unstop.com](https://unstop.com/blog/macros-in-c
+
+https://luckyresistor.me/page/avoid-preprocessor-macros/
+
+https://stackoverflow.com/questions/69755824/is-there-a-way-to-have-the-same-define-statement-in-different-files-that-are-in
+
+https://herovired.com/learning-hub/topics/macros-in-c
+
+
+https://stackoverflow.com/questions/23444371/how-to-write-safe-and-user-friendly-c-c-define-macros
+
+https://www.allpcb.com/allelectrohub/the-dowhile0-idiom-in-c-and-c
+
+https://spin.atomicobject.com/preprocessing-with-caution/
+
+******* civic tech idea:
+******** MY IDEA: a charitable giving platform that facilitates direct donations to homeless neighbors in need.
+********* Tree Canopy Tracker: A computer-vision project analyzing satellite data to find local neighborhoods lacking green cover
+********* https://dspace.mit.edu/entities/publication/b091ea46-752a-4f99-9585-3cdf1f06ef30
+********* according to HUGSI, the "greeness" of Malaysia is rated at 35%, with a grade of D- globally
+******** Civic tech software projects bridge the gap between residents and local systems by enhancing public transparency, improving community service coordination, or streamlining public engagement.
+https://medium.com/civic-makers/civictech-primer-what-is-civic-tech-7ea788e766d3
+https://www.computer.org/csdl/magazine/so/2022/06/09786040/1DQPBo2560M
+https://github.com/awesomelistsio/awesome-civic-tech
+## 📊 Transparency & Open Data
+
+******** Municipal Budget Visualizer: A tool that converts complex PDF government budgets into interactive charts.
+******** Public Records Tracker: A system to automate and track Freedom of Information Act (FOIA) requests.
+******** Legislative Vote Checker: An app tracking local council votes to show if representatives align with campaign promises.
+******** Zoning Change Alerter: A web scraper that notifies residents when property zoning rules change in their neighborhood.
+
+## 🛠️ Community Service & Mutual Aid
+
+******** Disaster Response Coordinator: A lightweight, offline-first app mapping local resources and shelter capacities during emergencies.
+******** Food Rescue Network: A platform connecting local restaurants with surplus food directly to nearby shelters.
+********* run drives to supply them with temperature-controlled logistics or extra delivery fleets.
+******** Tool & Equipment Library: An open-source inventory system for neighborhoods to share tools, reduction waste.
+******** Air Quality Mapping: A platform crowd-sourcing data from cheap, DIY IoT air monitors to map local pollution blocks.
+
+## 🗳️ Civic Engagement & Democracy
+
+******** Virtual Town Hall: A platform allowing moderated asynchronous video or text debates on local city proposals.
+******** Plain-Language Law Translator: An AI-assisted parser turning dense local ordinances into simple, accessible text.
+******** Digital Ballot Builder: A mock voting sandbox helping citizens research local candidates and measures before election day.
+******** Tenant Rights Navigator: A decision-tree app guiding low-income renters through local legal options against eviction.
+
+## 📈 Infrastructure & Environment
+
+******** Crowdsourced Hazard Mapper: A mobile app letting citizens map broken streetlights, aggressive potholes, or blocked bike lanes.
+******** Tree Canopy Tracker: A computer-vision project analyzing satellite data to find local neighborhoods lacking green cover.
+******** Public Transit Delay Reporter: A community-driven, real-time alert platform for reporting bus or train route issues.
+
+Before writing any code, it is highly recommended to explore existing open-source ecosystems like the [Civic Tech Field Guide](https://directory.civictech.guide/listing-category/open-source) to avoid duplication. Building on top of existing tools can maximize community impact with minimal wasted developer resources.
+Could you share more about your goals? Let me know:
+
+******** Your target programming language or stack
+******** The specific community problem you hope to solve
+******** Your project scale (hackathon prototype vs. long-term production app)
+******* We need to write all this somehere:
+******** #pragma comment: compiler specific preprocessor directive, for linking behaviour of Microsoft Visual C++
+******** #pragma comment: commonly used to link static library
+******** #pragma comment: GCC uses flags instead
+******** #pragma comment: Windows uses registry based, or fixed paths. Auto linking wouldbe fragile in a Linux environment, where library locations vary widely
+******** Clang: a popular alternativew compiler to GCC for game dev, which goes well with CMake
+******** C/C++ macros: It always pollutes the global namespace becoz the preprocessor substitutes text before the compiler processes namespace.
+******** Lisp preprocessor: its just macros, syntactic transformation performed in the compilation environment, 
+******** Lisp preprocessor: syntactic vs lexical. Unlike substition, it uses AST or S-expressions, 
+******** Lisp homoiconic: all Lisp code is lists. so macros can use any list-processing in Lisp to generate new code. . Lisp macro (itself) is turing complete
+******** compile-time func execution: C  NO! C++ yes, with constexpr and consteval
+******** C compile time computation: For c, only macro expansion and  constant expression
+******* Links:
+******** [[https://stackoverflow.com/questions/15002550/c-macros-and-namespaces][macros know nothing about namespaces]]
+******** [[https://www.artima.com/articles/reducing-preprocessor-namespace-pollution][reducing preprocessor namespace pollution]]
+******** 
+******* its time to master grep alist
+******** compilation-error-regexp-alist
+******** https://emacsredux.com/blog/2026/03/06/mastering-compilation-mode/
+******** https://groups.google.com/g/gnu.emacs.help/c/cBvCocaCBfs?pli=1
+******** https://christiantietze.de/posts/2025/08/clickable-swift-testing-failure-messages-in-emacs-compile-mode/
+******** https://doc.endlessparentheses.com/Var/compilation-error-regexp-alist.html
+******** https://andreyor.st/posts/2023-01-10-compiling-clojure-projects-in-emacs/
+******** https://emacs.stackexchange.com/questions/43956/which-regexp-from-compilation-error-regexp-alist-is-used-by-compilation-mode
+******* Lets read on creativity and false memory
+******** https://www.psychologytoday.com/us/blog/ulterior-motives/202110/surprising-link-between-creativity-and-false-memories
+******** https://pmc.ncbi.nlm.nih.gov/articles/PMC8594559/
+******* lets create an abbrev in 42: the steps are:
+#+begin_src emacs-lisp
+
+    ;; forget our special functions that auto insert.
+    ;; we dont have any variable or filename of our abbrev, so we first need to bootstrap by creating our abbrev table AND file
+    ;; at first it will NOT read our file, and the variable needs to setup first, so its a chicken or egg problem. We first create our file, start Emacs which creates an empty vector (which is our table). upon saving it will finally read our file
+    ;; redefine abbrev-file-name
+
+    (setq abbrev-file-name "/home/ardie/Documents/delete/another_defs")
+
+  ;; (add-hook 'org-mode-hook 'abbrev-mode)
+
+  (setq xx-abbrev-table (make-abbrev-table ))
+
+
+  (define-abbrev-table 'xx-abbrev-table
+    '(
+     ("fn" "function")
+     ("function" "function name (x) { return x; }"))
+    )
+
+  (define-derived-mode xx org-mode "xx"
+    "A major mode for xx."
+    :abbrev-table xx-abbrev-table
+    (abbrev-mode 1)
+    )
+
+
+  ;; once we save we can see our changes in those files
+
+  ;; remember to comment the define-abbrev-table becoz it will overwrite that file everytime
+
+  ;; So, even after all this, it still might not work. If so, we need to actually include these functions inside abbrev-file-name, so that Emacs can actully read it and do something
+
+  ;; inside abbrev-file-name
+
+  (define-abbrev-table 'ardie/c++-mode-abbrev-table
+  '(
+    ("qd" "qDebug() <<" nil :count 7)
+   ))
+
+#+end_src
+
+******* lets read about Raylib
+#+begin_quote
+
+
+Several C implementations exist for generating and solving mazes, ranging from simple recursive backtracking to complex roguelike grid systems. Joe Wingbermuehle's 1999 maze.c uses a randomized depth-first search algorithm to carve paths through a grid, initializing the map with walls and recursively visiting unvisited cells to create a perfect maze. 
+
+Maze Generation and Solving
+Algorithm: The code typically initializes a grid filled with walls (1), then uses a recursive backtracking or "carve" function to remove walls (0) while moving in random directions until the entire grid is explored. 
+Simulation: Advanced versions, such as those from Purdue University assignments, include functions to simulate an agent's movement through a generated maze based on a direction file, returning the number of steps or -1 if the path is invalid. 
+Roguelike Style: Projects like "Decoded: Rogue" utilize K&R style C functions to handle data copying and maze structures, often employing a "cell" abstraction where walls occupy entire grid cells rather than single characters. 
+Code Example (Simplified Recursive Backtracker)
+A basic implementation initializes a 2D array, marks the start cell, and recursively visits neighbors to carve paths:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define WIDTH 21
+#define HEIGHT 21
+
+// 1 = Wall, 0 = Path
+int maze[HEIGHT][WIDTH];
+
+// Function to check if a cell is valid and unvisited
+int is_valid(int x, int y) {
+    return (x > 0 && x < WIDTH - 1 && y > 0 && y < HEIGHT - 1 && maze[y][x] == 1);
+}
+
+// Recursive function to generate the maze
+void generate_maze(int x, int y) {
+    int dx[] = {0, 0, 2, -2};
+    int dy[] = {2, -2, 0, 0};
+    
+    maze[y][x] = 0; // Mark current cell as path
+    
+    // Shuffle directions for randomness
+    srand(time(NULL));
+    
+    for (int i = 0; i < 4; i++) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        
+        if (is_valid(nx, ny)) {
+            maze[(y + dy[i] / 2)][(x + dx[i] / 2)] = 0; // Carve wall between cells
+            generate_maze(nx, ny);
+        }
+    }
+}
+
+int main() {
+    // Initialize maze with walls
+    for (int y = 0; y < HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            maze[y][x] = 1;
+        }
+    }
+    
+    // Start generation from (1, 1)
+    generate_maze(1, 1);
+    
+    // Print the maze
+    for (int y = 0; y < HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            printf("%c ", maze[y][x] ? '#' : '.');
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+
+#+end_quote
+******* we might have to lower org-drill-learn-fraction to increase frequency of our org-drill
+******* a debugging framework in eLisp and Lisp, why is debugging so hard in Emacs and Lisp
+******* the only thing you need to master Emacs is "highlight your text"
+******* the real reason why we're changing is because I keep accidentally pressing M-v for scroll-down-command, so doing it this way feels like a lot of win
+******* 2 recipes involving lovi lovi, or Flacourtia Intermis
+******** https://yumpickles.wordpress.com/2012/02/24/lovi-lovi-flacourtia-inermis-pickle/
+******** https://archwaytomomsgarden.blogspot.com/2014/10/lovi-chutney-sweet-sweet-lovi-chutney-i.html
+******* we should also post about infra-sounds of AI data centers.
+******* We need to post about 42KL somewhere in Facebook AND Developer Kaki
+******* we need to practice typing using home rows: https://www.keybr.com/
+******** lair liar line rail nail linen learn alien all real ill earlier
+******** nail alien real lie lane lean learn 
+******* https://www.coddykit.com/pages/blog-detail?id=512749
+******** we need to read about code visualization
+******* Dev Kaki
+******** https://www.nvidia.com/gtc/?ncid=ref-inpa-296-prsp-en-gb-1-l11
+******** select a session and STAY at least 5 minutes, and take a screenshot of u joining the session, and send to:
+******** https://forms.gle/6bHa6ijhh15sgCwCA
+******* [[https://dev.to/darkwiiplayer/an-introduction-to-coroutines-38i4][Introduction to coroutines (and stackful vs stackless)]]
+******** dealing with terminoloy
+******** coroutines: functions that can pause itself
+******** there is caller and the callee, the caller CALLS the function, it EXECUTES, then RETURNS to the caller
+******** coroutine: the caller CALLS the function, it EXECUTES, then YIELDS to the caller
+******** what is YIELD?
+******** Asymmetric coroutines: similar to functions, once it calls a function, control can only be returned from the function called. 
+******** Basically: it cannot be RESUMED (from the ~top), only yielded to
+******** Symmetriccoroutines: control can come from anywhere, we will call it TRANSFER
+******** ----- continued -----
+******* [[https://www.youtube.com/watch?v=H7c92T-megA][we need to learn about clothes]]
+******* [[https://thephilosophicalsalon.com/avengers-and-the-endgame-of-liberalism/][WRITE about Avengers Endgame and the end of liberalism]]
+******** https://www.thestranger.com/film/2018/04/27/26108191/a-fucking-liberal-is-the-villain-of-avengers-infinity-war
+******* [[https://www.youtube.com/watch?v=hKHjH5OU7Eo][Artists dont follow rules]]
+******** be delusional.
+******** People go, "oh no, thats not realistic" - GOOD
+******** "oh, thats not going to happen" - GOOD
+******** And people are saying, "whats wrong with you" - Youre on the right track.
+******* [[https://www.youtube.com/watch?v=lhwnOBjSklE][verbal orange cones]]
+******* [[https://www.youtube.com/watch?v=J-SH18dtBlY][speech jammer]] 
+******* https://www.youtube.com/shorts/bwAKNGgMKg0
+******* mu4e
+#+begin_quote
+
+
+
+https://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and/
+
+How to setup email in Emacs
+-install mu (but mu is only for indexing and searchng emails)
+-offlineimap (becoz mu needs another software to keep a local copy of ur emails)
+-offlineimap can set up 2 emails (in the example, the guy sets a script to sync both emails every 5 minutes)
+-the configs are stored inside  ~/.offlineimaprc
+Concepts
+--in that file, just like Git, there is a "named" local and remote repo of your email
+--you can choose any folder
+--you can can STORE YOUR PASSWORD, not recommended, usually under remotepass\
+--we dont want that, so instead we can use Python and GPG
+--"folderfilter" can filter folders, as well Googles bad default "All Mail/Important"
+--to keep indexing we put "mu index" via postsynchook
+--this is DONE, so we call offlineimap thatstarts a process and syncs every 5 min
+--but this means leaving terminal open, so we start a daemon
+--mu4e comes installed with mu (mu is the "real package", mu4e is the Emacs package that comes with it), we need to include mu4e path in our Emacs load-path
+--in "headers", we have severl shortcu options
+--by setting mu4e-contexts variable, we can make our mu4e aware of our email source, if its Gmail, the variable mu4e-trash-folder and mu4e-refile-folder is changed. So our delete commands for example, are context-aware
+--he defines mu4e-refile-folder as a function, that filters using (cond) and (mu4e-message-field msg :subject) to check the message's subjct against a text and filters further more
+--
+
+mmu4e alert
+-mu4e-alert-enable-mode-line-display calling this would update modeline with unread msgs
+-which means we need to run-with-timer
+-problem: mu4e maintains connection with server, which mu index will never (we NEVER get email updates)
+-we solve this with mu4e~proc-kill
+-we put all these all in use-package (as in example)
+-we set variable mu4e-alert-interesting-mail-query for selective alerts, becoz Google being weird, marks all folders moved to trash as unread
+-to send email we need SMTP, we set a bunch of SMTP parameters just our like Python Flask project. But we also have account specific parameters (we use setq for the SMTP, and mostly defvar for the account-spec)
+-the my-mu4e-set-account function is to combine (set operation-ish) SMTP values and account-spec values,
+
+
+https://www.macs.hw.ac.uk/~rs46/posts/2014-01-13-mu4e-email-client.html
+
+-offlineimap mentioned above is a tool (offline) to sync copy. An alternative here is mbsync.
+-just like before we are using symmetric encryption (one way, public key only). We create a dotfile, written in is our password, and generate a public key
+-they both seem to use 2 different hooks
+-there also some variables not used in previous article: mu4e-get-mail-command (here we set to a mbsync command) mu4e-html2text-command mu4e-update-interval mu4e-headers-auto-update mu4e-compose-signature-auto-include
+-we got more commands here
+
+
+  https://f-santos.gitlab.io/2020-04-24-mu4e.html
+
+#+end_quote
+******* [[https://www.youtube.com/watch?v=ZJ09dPNJ8G8][How programming jobs get created and destroyed]]
+#+begin_quote
+
+ 
+How IT/programmers jobs are actually created.
+
+He hasnt worked in gaming indusrty and foesnt plan to
+
+everything tech indusrty is largely custome in the last few decandes
+
+the non tech is largely the same.
+
+So all programming jobsh is largely between a speectrum and a slidin scale, mainigng old code and a new stratup (and everyinqg in between)
+
+It was a lot like construction was, back before girders and planks were standardized, and construction used whatever resources they found at the time.
+
+Nowadays, the analogy no loner works, becoz construction is mostly standardized, nad programming isnt (even for "big" companies)
+
+what happend:
+
+ - some gets an idea,
+ - tis person, asometimes a solo entrpnour, getting money from investors, or gets money from a company
+ - why is tis money allocated, somtimes company gets somuch money, they spend all that money on a new projec
+ - this was true years ago, when programmer salaries were through the roof
+ - if this is not true, the money is borrowed or from investors, who believe once the money is built, he gets the money back.
+ - NOW, assuming the person with the idea isnt building it himeseves, he needs tecanical people. hires people as employees, and hires consultants from company that bulds sofware on demand.
+ - in ideal worlds, the first person they hire is a senior tech person to plan stuff, and hire others.
+ - mostly its not ideal, so they hire recruiter from the same or a consultant company. If the person hires full consultant company, they also look for more people by looking for recuiters themselves.
+ - 
+
+What spawned the leet-code interviews
+
+
+
+#+end_quote
+******* Be consistent like Louis Rossmann, how can we provide a counter-incentive structure to (the massive incentive use of) AI.
+******* YouTubers who have no issue with long/fat functions. And even those who like functions chunky (I like em chunky too, wink, wink)
+******* The #1 reason to use Emacs is to write a diary
+******* Cool video on what compilers do behind the scenes, explained in a very friendly manner. Also, now that Im going down the rabbit hole of programming langs again. I just realized English as a language has a lot ambiguity in it. It is "easy" only becoz of its dominance, but its actually difficult to master from a non-native speaker, becoz theres a lot overloaded terms.
+******* The bullshitness of supply and demand (write this in an org file)
+******* "Public school is about education. It is NOT job training. And it should not be. Otherwise, the capitalists win." 
+******* [[https://www.youtube.com/watch?v=w3krYEeqnyk&t=1214s][conquering kubernetes with Emacs]]
+******* [[https://people.kernel.org/linusw/rust-in-perspective][rust in perspective, AMAZING history of languages]]
+******** What do you guys thik of this article?
+******** Article says that Rust is attempting to raise the abstraction of the programming language. (and to consolidate Computer Science and Software Engineering) (Ardie: I have no idea what that means)
+******** The first "real" Operating System that used virtual memory, used a language called Atlas autocode, a dialect ALGOL. 
+******** TIDBIT: What is virtual memory, The infamous schizophreniac racist Terry Davis who created his own super tiny, super efficient OS, his OS doesnt use virtual memory, the result is super fast and efficient.
+******** ALGOL inspired CPL which inspired BCPL which inspired B which inspired C
+******** ALGOL was popular the time of UNIX, and C was not universally loved for valid reasons
+******** Understatement: it was universally hated as well
+******** The original Bourne Shell source code at the time, showed a dialect of ALGOL in the code. Stephen Bourne, created a set of C macros, so the C preprocessor would translate his code into C. He went to quite an effort to avoid C.
+******** The article makes a VERY interesting point about TDD (Test Driven Development, you hear it everywhere in the real world)
+******** A conference that is famous among UNIX circles at the time is the Garmisch conference.
+******** Smaller mention in that conference. Of "analytic verification" and "correctness proof" ==> supposed to replace testing (or Test Driven Development)
+******** TDD is mostly Software Engineering. Analytic vertification is mostly Computer Science.
+******** TDD is not easy
+******** Interesing:
+********* The discussions in Garmisch had an influence on the programming language Pascal strings
+********* "Pascal strings": a massive improvement over ALGOL
+********* This String is stored in memory begins with a positive integer that defines of the string. The abstraction of strings is "raised", a higher level language thing. Different way to say it? In Pascal, strings in Pascal are set-entities.
+********* How Niklaus Wirth (some creator of a language called Pascal), both critized C language. Something along the lines of "it gives the appearance of high level language while not behaving like 1". An example is how C has no "awareness" of array sizes and we are dealing with memory addresses. (In C, you have to pass the size of the array into a function). If any benefit of having this low level of control, is that the pointer can refer to anything, register/RAM/etc. Its debatable whether its "good" power and control.
+********* Is C a high or low level language?.... C is misleading.... it claims to be higher than Assembly... but its actually amazingly stupid.... has no awareness of array or string size.... hence the necessity to pass size of arrays in a function
+******** Conclusion: I dont hate C that much actually (or I should really hate it more than I should). Coz a language like C (effiency-obsessed, hacky syntax and directly manipulating memory) is like Thanos, its inevitable. If Dennis Ritchie didnt make C, someone else would make a C-like (and by extension Linux is inevitable). Also, becoz society is generally shitty (and rent-seeking trascends everything) a lang like C is inevitable. 
+******** (Can you imagine, that compilers were once jealously guarded secrets? And a programmer had to pay LOTS of money for a compiler? in 1 example 200 USD, LOL)
+******** Also conclusion: Never trust anyone who has only programmed in 1 language.
+******** There are many other interesting points in this article that I either did not understand or mentioned
+******** References:
+********* https://hackaday.com/2018/04/04/the-basics-and-pitfalls-of-pointers-in-c/
+***** Jobs:
+****** [[https://app.outlier.ai/en/expert][Outlier tasks]]
+****** micro1
+****** Interesting companies
+******* PostCo: really likes open minded developers, who learn rare stuff. says want developers open to learning Ruby on Rails 
+******* Hero Plus Group: uses Ruby in Rails. Specifically mentions Flask.
+****** https://my.hiredly.com
+****** https://www.maukerja.my/
+****** https://www.jorawork.com/
+****** https://www.ricebowl.my
+****** Read about orchestration and automation
+****** about Google cloud platforms: Snowflake and Databricks (good to have)
+****** maybe SQL and Azure diffs
+***** Emacs
+****** We need to: how to get inline rust documentation in emacs without lsp server
+****** We need to: what is the qch file format qt
+****** Convincing others:
+******* Non-destructive ways to test Emacs packages:
+******** use the try package. Then do the usual use-package, or any normal config for that package you found online.
+****** Also try Emacs Application Framework on a new laptop
+****** You like trying cool custom personalized Emacs el. This one is useful simpler bookmark, might help a lot in you html editing: [[https://github.com/joodland/bm][here]]
+****** we are professional, so we need to make Python SUBMIT to us. [[https://emacs.stackexchange.com/questions/3372/coloring-indentation-levels][Color diff indentation levels]]
+****** web-mode-element-wrap must be hydra-ed. We also need to auto-select a whole delimiter. But first try the stackoverflow templating engine trick.
+****** We need to learn this Emacs [[https://emacs.stackexchange.com/questions/23810/getting-proper-indentation-for-python-flask-templates][templating indent]] mode thingy
+***** I read about ketamine, psilocybin and alcohol, and also neurotransmitter GABA
+****** https://adf.org.au/drug-facts/ketamine/
+****** https://www.psychologytoday.com/intl/blog/culturally-speaking/202312/the-magic-behind-the-molecules-psilocybin-vs-alcohol
+****** https://my.clevelandclinic.org/health/articles/22857-gamma-aminobutyric-acid-gaba
+******* Researchers are still studying the effects of increased level of GABA, for High blood pressure, Insomnia, Diabetes.
+****** GABA presence in food:
+*******  kimchi, miso and tempeh
+******* green, black and oolong tea
+******* brown rice, soy and adzuki beans, chestnuts, mushrooms, tomatoes, spinach, broccoli, cabbage, cauliflower, Brussels sprouts, sprouted grains and sweet potatoes
+***** [[https://ringgitplus.com/en/blog/income-tax/how-to-file-your-taxes-for-the-first-time.html][read on how to do e-filing for d first time]]
+***** Read about your Hugo
+****** Understand layouts and everything inside (partials, shortcodes, _default)
+****** When you replaced your /layouts folder, it fails, simple rename back /_layouts
+* Piano (no social media progress)
+** You need to buy a stand
+* MyKasih, SARA, MySTR
+** https://bantuantunai.hasil.gov.my/2026/Identity/Account/Login
+** https://checkstatus.mykasih.net/sara2/checkstatus
+* More org notes
+** For suit, call these numbers for material. (Mention that Sparkle, Lot L-D 1&2, Pudu Plaza, KL recommended these guys)
+*** 011 70018033
+*** 013 343 2049
+*** 018 398 5048
+* Address:
+** G-12-30, BLOCK G MENTARI COURT Gate 1, Jalan PJS 8/9, Bandar Sunway, 46150 Petaling Jaya, Selangor, Malaysia
